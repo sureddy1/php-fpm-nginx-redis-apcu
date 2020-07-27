@@ -11,10 +11,10 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '501bd84e-02f6-4424-a92d-224b8fc7af2c'
-  imageRepository: 'phpfpm74nginx'
+  imageRepository: 'php-fpm'
   containerRegistry: 'usidsrsucr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: '7.4-nginx'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
