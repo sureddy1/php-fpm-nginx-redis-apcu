@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/oryx/php:7.4-fpm
 
 ENV SSH_PASSWD "root:Docker!"
 ENV SSH_PORT 2222
+COPY sshd_config /etc/ssh/
 
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
