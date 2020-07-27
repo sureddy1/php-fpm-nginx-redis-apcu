@@ -19,7 +19,7 @@ RUN pecl install -o -f redis \
 
 RUN pecl install -o -f apcu \
     && rm -fr /tmp/pear \
-    && echo "extension=apcu.so" > /usr/local/etc/php/conf.f/docker-php-ext-apcu.ini
+    && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
 COPY opcache-recommended.ini /usr/local/etc/php/conf.d/
 
