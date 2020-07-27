@@ -7,6 +7,9 @@ ENV SSH_PASSWD "root:Docker!"
 ENV SSH_PORT 2222
 COPY sshd_config /etc/ssh/
 
+RUN set -x \
+    && echo "$SSH_PASSWD" | chpasswd
+
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
 
