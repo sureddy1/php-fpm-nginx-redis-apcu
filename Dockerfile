@@ -12,7 +12,7 @@ RUN set -x \
 
 RUN apt update \
     && apt install -y redis \
-    && apt install -y nginx-extras
+    && apt install -y libnginx-mod-http-cache-purge
 
 RUN pecl install -o -f redis \
     && rm -fr /tmp/pear \
