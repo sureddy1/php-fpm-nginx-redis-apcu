@@ -11,7 +11,8 @@ RUN set -x \
     && echo "$SSH_PASSWD" | chpasswd
 
 RUN apt update \
-    && apt install -y redis
+    && apt install -y redis \
+    && apt install -y nginx-extras
 
 RUN pecl install -o -f redis \
     && rm -fr /tmp/pear \
@@ -22,6 +23,15 @@ RUN pecl install -o -f apcu \
     && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
 COPY opcache-recommended.ini /usr/local/etc/php/conf.d/
+COPY php-recommended.ini /usr/local/etc/php/conf.d/
+
+COPY nginx/default.conf /etc/nginx/conf.d/
+COPY nginx/nginx.conf /etc/nginx/
+
+COPY php-fpm/docker.conf /usr/local/etc/php-fpm.d/
+COPY php-fpm/www.conf /usr/local/etc/php-fpm.d/
+COPY php-fpm/zz-docker.conf /usr/local/etc/php-fpm.d/
+
 
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
