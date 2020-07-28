@@ -11,7 +11,7 @@ mkdir -p /var/run/php
 touch /var/run/php/php-fpm.sock
 
 chown -R www-data:www-data /var/run/php/php-fpm.sock
-chmod 777 /var/run/php-php-fpm.sock
+chmod 777 /var/run/php/php-fpm.sock
 
 echo "Starting nginx"
 service nginx start
