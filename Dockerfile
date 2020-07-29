@@ -32,6 +32,7 @@ COPY php-fpm/docker.conf /usr/local/etc/php-fpm.d/
 COPY php-fpm/www.conf /usr/local/etc/php-fpm.d/
 COPY php-fpm/zz-docker.conf /usr/local/etc/php-fpm.d/
 
+COPY content/index.php /var/www/html/
 
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
