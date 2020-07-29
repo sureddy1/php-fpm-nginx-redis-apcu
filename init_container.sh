@@ -13,6 +13,13 @@ touch /var/run/php/php-fpm.sock
 chown -R www-data:www-data /var/run/php/php-fpm.sock
 chmod 777 /var/run/php/php-fpm.sock
 
+test -e /var/log/php-fpm/error.log && rm -f  /var/log/php-fpm/error.log
+mkdir -p /var/log/php-fpm
+touch /var/log/php-fpm/error.log
+
+chown -R www-data:www-data /var/log/php-fpm
+chmod 777 /var/log/php-fpm/error.log
+
 echo "Starting nginx"
 service nginx start
 
