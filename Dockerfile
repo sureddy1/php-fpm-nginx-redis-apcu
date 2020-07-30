@@ -47,7 +47,7 @@ RUN set -ex; \
 	mkdir -p /var/www/html/wp-content; \
 	for dir in /var/www/html/wp-content/*/; do \
 		dir="$(basename "${dir%/}")"; \
-		mkdir "wp-content/$dir"; \
+		mkdir -p "wp-content/$dir"; \
 	done; \
 	chown -R www-data:www-data wp-content; \
 	chmod -R 777 wp-content
