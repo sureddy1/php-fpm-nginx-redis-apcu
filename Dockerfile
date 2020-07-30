@@ -57,5 +57,5 @@ COPY content/wp-config.php /var/www/html/
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
 
-EXPOSE $SSH_PORT 8080
+EXPOSE $SSH_PORT 80
 ENTRYPOINT ["/bin/init_container.sh"]
