@@ -44,7 +44,7 @@ RUN set -ex; \
     cp -r /tmp/wordpress/* /var/www/html/; \
 	chown -R www-data:www-data /var/www/html; \
 # pre-create wp-content (and single-level children) for folks who want to bind-mount themes, etc so permissions are pre-created properly instead of root:root
-	mkdir wp-content; \
+	mkdir -p /var/www/html/wp-content; \
 	for dir in /var/www/html/wp-content/*/; do \
 		dir="$(basename "${dir%/}")"; \
 		mkdir "wp-content/$dir"; \
