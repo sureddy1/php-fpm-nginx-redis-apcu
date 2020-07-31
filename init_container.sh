@@ -13,18 +13,24 @@ touch /var/run/php/php-fpm.sock
 chown -R www-data:www-data /var/run/php/php-fpm.sock
 chmod 777 /var/run/php/php-fpm.sock
 
-test -e /var/log/php-fpm/error.log && rm -f  /var/log/php-fpm/error.log
-mkdir -p /var/log/php-fpm
-touch /var/log/php-fpm/error.log
+#test -e /var/log/php-fpm/error.log && rm -f  /var/log/php-fpm/error.log
+#mkdir -p /var/log/php-fpm
+#touch /var/log/php-fpm/error.log
 
-chown -R www-data:www-data /var/log/php-fpm
-chmod 777 /var/log/php-fpm/error.log
+#chown -R www-data:www-data /var/log/php-fpm
+#chmod 777 /var/log/php-fpm/error.log
+
+#Checks to copy wp-content to /home/site/wwwroot if this is a newly created wordpress site.
+
+if [[ ! -d /home/site/wwwroot/wp-content && ! -d /home/site/wwwroot/wp-content/plugins && ! -e /home/site/wwwroot/wp-content/index.php && ! -e /home/site/wwwroot/wp-content/plugins/index.php]]; then
+mv -un /var/www/html/wp-content /home/site/wwwroot/
+fi
 
 echo "Starting nginx"
 service nginx start
 
 echo "Starting Redis"
-redis-server &
+service redis-server start
 
 echo "Starting php-fpm"
 /usr/local/bin/docker-php-entrypoint php-fpm

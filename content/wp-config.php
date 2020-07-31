@@ -20,7 +20,7 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wpdb' );
+define( 'DB_NAME', 'wordpress' );
 
 /** MySQL database username */
 define( 'DB_USER', 'dbadmin@ustxmysql' );
@@ -37,6 +37,9 @@ define( 'DB_CHARSET', 'utf8mb4' );
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+/* Add FS_METHOD to avoid ftp prompts on plugin installs. */
+define('FS_METHOD', 'direct');
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
@@ -46,14 +49,15 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '0niZ9Eh VM:4?&cU,Vuj:MQE~49+n!~`t-qS?,?GxsUnDCe8QNqeZqMa6b1Uci*S' );
-define( 'SECURE_AUTH_KEY',  ':MhCY>du$u~_sI;>m3aZh A:Z|-2<=O8o&=Fj&G!q[~;dI5ZC|.Fr2o(9i9?m!80' );
-define( 'LOGGED_IN_KEY',    'ap--enf|+TjE#<Cd~bad6[+R7o@(UaM~!(By#F,f5K?@F)|5)bbjWHAcH>sN_lM6' );
-define( 'NONCE_KEY',        'Xq)O[pwSRW@i_3FHW;~;{Qxv>WN>D!edAWj4!L^r~$C}U AA55}0Sy;@1Z-k9+Kq' );
-define( 'AUTH_SALT',        'mv,t]fY%8D4JP42~%,Q|Yl#1@e.VH(/Qvs%I(RU8WlW(!uc`QQ#%JP0X&Q_vV!bQ' );
-define( 'SECURE_AUTH_SALT', '8^lcy0?;SyVxAha0h|``CfX+YA~Z)CpLyRt+6GTWo=-)+((#EC*p0zE#($08mDQ{' );
-define( 'LOGGED_IN_SALT',   'wjS OD~W6,eI:~K;6iZh`XDn-S4lyrZz$3J]q7sx<REEc~O=c~.o_fEx<0(?EI(F' );
-define( 'NONCE_SALT',       'rFr9D?jMLES) c)#l`%vNuZ@4%9A{@_)hblX} G7 pc(X0FRcGGja;AIk@Wn|P;(' );
+
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
 
 /**#@-*/
 
@@ -64,6 +68,15 @@ define( 'NONCE_SALT',       'rFr9D?jMLES) c)#l`%vNuZ@4%9A{@_)hblX} G7 pc(X0FRcGG
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = 'wp_';
+
+/* change wp-content directory thereby changing plugins and themes directory*/
+/* This change is to primarily persist changes that users make to their WP install*/
+define('WP_CONTENT_DIR','/home/site/wwwroot/wp-content');
+define('WP_PLUGIN_DIR','/home/site/wwwroot/wp-content/plugins');
+
+
+/* Setting for nginx helper to know where nginx fastcgi cache is stored. Default is /var/run/nginx-cache */
+define('RT_WP_NGINX_HELPER_CACHE_PATH','/tmp/nginx-cache/');
 
 /**
  * For developers: WordPress debugging mode.
@@ -79,11 +92,26 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
+/* Settings for https. If redirect to https is on, below settings are needed. If not post updates will fail */
+
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+	$_SERVER['HTTPS'] = 'on';
+
+define('WP_HOME', 'https://'. $_SERVER['HTTP_HOST']);
+
+define('WP_SITEURL', 'https://'. $_SERVER['HTTP_HOST']);
+
+/* End of settings for https */
+
+define('WP_CONTENT_URL', '/wp-content');
+
+define('DOMAIN_CURRENT_SITE', $_SERVER['HTTP_HOST']);
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-        define( 'ABSPATH', __DIR__ . '/' );
+	define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
