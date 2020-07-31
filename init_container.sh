@@ -22,7 +22,7 @@ chmod 777 /var/run/php/php-fpm.sock
 
 #Checks to copy wp-content to /home/site/wwwroot if this is a newly created wordpress site.
 
-if [[ ! -d /home/site/wwwroot/wp-content && ! -d /home/site/wwwroot/wp-content/plugins && ! -e /home/site/wwwroot/wp-content/index.php && ! -e /home/site/wwwroot/wp-content/plugins/index.php]]; then
+if [[ ! -d /home/site/wwwroot/wp-content && ! -d /home/site/wwwroot/wp-content/plugins && ! -e /home/site/wwwroot/wp-content/index.php && ! -e /home/site/wwwroot/wp-content/plugins/index.php ]]; then
 mv -un /var/www/html/wp-content /home/site/wwwroot/
 fi
 
