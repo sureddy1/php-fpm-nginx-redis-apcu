@@ -26,6 +26,13 @@ if [[ ! -d /home/site/wwwroot/wp-content && ! -d /home/site/wwwroot/wp-content/p
 mv -un /var/www/html/wp-content /home/site/wwwroot/
 fi
 
+# Check and add a symlink to wp-content for static content in themes directory
+
+if [[ ! -L /var/www/wwwroot/wp-content ]]; then
+ln -s /home/site/wwwroot/wp-content /var/www/html/wp-content
+chown www-data:www-data /var/www/html/wp-content
+fi
+
 echo "Starting nginx"
 service nginx start
 

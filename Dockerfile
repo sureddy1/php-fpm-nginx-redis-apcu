@@ -54,9 +54,8 @@ RUN set -ex; \
 	chmod -R 777 wp-content
 
 COPY content/wp-config.php /var/www/html/
-
 RUN chown -R www-data:www-data /var/www/html/wp-config.php
-
+    
 COPY init_container.sh /bin/
 RUN chmod +x /bin/init_container.sh
 
