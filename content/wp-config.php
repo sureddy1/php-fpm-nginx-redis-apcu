@@ -20,16 +20,23 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'wordpress' );
+
+$connectstr_dbhost = getenv('DATABASE_HOST');
+$connectstr_dbname = getenv('DATABASE_NAME');
+$connectstr_dbusername = getenv('DATABASE_USERNAME');
+$connectstr_dbpassword = getenv('DATABASE_PASSWORD');
+
+
+define('DB_NAME', $connectstr_dbname);
 
 /** MySQL database username */
-define( 'DB_USER', 'dbadmin@ustxmysql' );
+define('DB_USER', $connectstr_dbusername);
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'Msft12!@' );
+define('DB_PASSWORD',$connectstr_dbpassword);
 
 /** MySQL hostname */
-define( 'DB_HOST', 'ustxmysql.mysql.database.azure.com' );
+define('DB_HOST', $connectstr_dbhost);
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
